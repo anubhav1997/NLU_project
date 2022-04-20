@@ -16,7 +16,7 @@ The file <it>Baselines_plus_BERT.ipynb</it> contains our implementation of each 
 
 The folder <it>training_data</it> contains the entire vocabulary and all the tags.<br>
 
-The folder <it>Tag_Mappings</it> contains the mappings of the tags for our chosen languages to their corresponding universal tags.<br>
+The folder <it>Universal_Tag_Mappings</it> contains the mappings of the tags for our chosen languages to their corresponding universal tags.<br>
 
 
 
