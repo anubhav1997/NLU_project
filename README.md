@@ -14,9 +14,9 @@ The file <it>Baselines_plus_BERT.ipynb</it> contains our implementation of each 
 1. Bi-LSTM model for Part-of-Speech Tagging (Plank et. al)
 2. Bi-LSTM model for Part-of-Speech Tagging (Munoz et. al 2020)
 
-The folder <it>training_data<\it> contains the entire vocabulary and all the tags.<br>
+The folder <it>training_data</it> contains the entire vocabulary and all the tags.<br>
 
-The folder <it>Uni_tag_mapper<\it> contains the mappings of the tags for our chosen languages to their corresponding universal tags.<br>
+The folder <it>Tag_Mappings</it> contains the mappings of the tags for our chosen languages to their corresponding universal tags.<br>
 
 
 
