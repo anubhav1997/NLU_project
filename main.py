@@ -119,7 +119,7 @@ with open(args.data_path + 'clinical_spanish_tags.pkl', 'rb') as f:
     tags_spanish_med = pickle.load(f)
 
 train_loader_spanish_medical, valid_loader_spanish_medical, test_loader_spanish_medical, label_vocab = get_dataloader(sentences_spanish_med, tags_spanish_med, model_name, tokenizer, label_vocab, test_size=1.0, batch_size=BATCH_SIZE)
-print('SPANISH MEDICAL', *perf(model, test_loader_spanish_medical))
+print('SPANISH MEDICAL', *perf(model, test_loader_spanish_medical, label_vocab))
 
 
 with open(args.data_path + 'social_german_words.pkl', 'rb') as f:
@@ -128,7 +128,7 @@ with open(args.data_path + 'social_german_tags.pkl', 'rb') as f:
     tags_german_social = pickle.load(f)
 
 train_loader_german_social, valid_loader_german_social, test_loader_german_social, label_vocab = get_dataloader(sentences_german_social, tags_german_social, model_name, tokenizer, label_vocab, test_size=1.0, batch_size=BATCH_SIZE)
-print('GERMAN SOCIAL', *perf(model, test_loader_german_social))
+print('GERMAN SOCIAL', *perf(model, test_loader_german_social, label_vocab))
 
 
 with open(args.data_path + 'romanian_medical_words.pkl', 'rb') as f:
@@ -138,12 +138,12 @@ with open(args.data_path + 'romanian_medical_tags.pkl', 'rb') as f:
 
 train_loader_romanian_medical, valid_loader_romanian_medical, test_loader_romanian_medical, label_vocab = get_dataloader(sentences_romanian_medical, tags_romanian_medical, model_name, tokenizer, label_vocab, test_size=1.0, batch_size=BATCH_SIZE)
 
-print('ROMANIAN MEDICAL', *perf(model, test_loader_romanian_medical))
+print('ROMANIAN MEDICAL', *perf(model, test_loader_romanian_medical, label_vocab))
 
 
-print('ALL DATA', *perf(model, test_loader))
+print('ALL DATA', *perf(model, test_loader, label_vocab))
 
-print('English Medical', *perf(model, test_loader_medical))
+print('English Medical', *perf(model, test_loader_medical, label_vocab))
 
 
 
