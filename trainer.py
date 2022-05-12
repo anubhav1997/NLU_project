@@ -111,4 +111,4 @@ def fit_intermixing(model, epochs, train_loader, train_loader2, valid_loader, la
                     optimizer.step()  # modify model parameters
                     total_loss += loss.item()
                 num += 1
-        print(1 + epoch, total_loss / num, *perf(model, valid_loader))
+        print(1 + epoch, total_loss / num, *perf(model, valid_loader, label_vocab))

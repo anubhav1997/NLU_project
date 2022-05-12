@@ -97,7 +97,7 @@ elif args.model_name == 'xlm_adapter':
 
 
 
-print(label_vocab)
+# print(label_vocab)
 
 if args.mode == 'standard':
     fit(model, args.epoch, train_loader, valid_loader, label_vocab, lr=args.lr)
@@ -143,7 +143,7 @@ print('ROMANIAN MEDICAL', *perf(model, test_loader_romanian_medical, label_vocab
 
 print('ALL DATA', *perf(model, test_loader, label_vocab))
 
-print('English Medical', *perf(model, test_loader_medical, label_vocab))
+print('ENGLISH MEDICAL', *perf(model, test_loader_medical, label_vocab))
 
 
 
