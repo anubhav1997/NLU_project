@@ -8,7 +8,7 @@ import argparse
 from transformers import AutoConfig
 from transformers import AutoAdapterModel
 from sklearn.model_selection import train_test_split
-from trainer import fit, fit_intermixing, perf
+from trainer import fit, fit_intermixing, perf, fit_interleaving
 from transformer_models import get_tokenizer, LinearProbeBert_adapter, LinearProbeXLM_adapter, LinearProbeXLM, LinearProbeBERT
 from utils import get_dataloader
 
@@ -108,6 +108,8 @@ elif args.mode == 'shuffling':
     fit(model, args.epoch, train_loader, valid_loader, label_vocab, lr=args.lr)
 elif args.mode == 'intermixing':
     fit_intermixing(model, args.epoch, train_loader, train_loader_medical, valid_loader, label_vocab, lr=args.lr)
+elif args.mode == 'interleaving':
+    fit_interleaving(model, args.epoch, train_loader, train_loader_medical, valid_loader, label_vocab, lr=args.lr)
 
 
 

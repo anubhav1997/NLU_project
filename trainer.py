@@ -112,3 +112,57 @@ def fit_intermixing(model, epochs, train_loader, train_loader2, valid_loader, la
                     total_loss += loss.item()
                 num += 1
         print(1 + epoch, total_loss / num, *perf(model, valid_loader, label_vocab))
+
+
+
+def fit_interleaving(model, epochs, train_loader, train_loader2, valid_loader, label_vocab, lr=1e-2, alphabet=None):
+    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.Adam(model.parameters(), lr=lr)
+    for epoch in range(epochs):
+        model.train()
+        total_loss = num = 0
+        for i, (data1, data2) in enumerate(zip(cycle(train_loader), train_loader2)):
+            optimizer.zero_grad()  # start accumulating gradients
+            x = data1[0].to(device)
+            y = data1[1].to(device)
+            # loss1 = loss2 = 0
+            if x.shape[1] >= 512:
+                continue
+            else:
+                if alphabet:
+                    y_scores = model(x, alphabet[i])
+                else:
+                    y_scores = model(x)
+                loss1 = criterion(y_scores.view(-1, len(label_vocab)), y.view(-1))
+                # if not torch.isnan(loss):
+                #     loss.backward()  # compute gradients though computation graph
+                #     optimizer.step()  # modify model parameters
+                #     total_loss += loss.item()
+                num += 1
+
+            x = data2[0].to(device)
+            y = data2[1].to(device)
+
+            if x.shape[1] >= 512:
+                continue
+            else:
+                if alphabet:
+                    y_scores = model(x, alphabet[i])
+                else:
+                    y_scores = model(x)
+                loss2 = criterion(y_scores.view(-1, len(label_vocab)), y.view(-1))
+                num += 1
+
+            loss_total = 0
+            if not torch.isnan(loss1):
+                loss_total += loss1
+            if not torch.isnan(loss2):
+                loss_total += loss2
+
+            if not torch.isnan(loss_total):
+
+                loss_total.backward()  # compute gradients though computation graph
+                optimizer.step()  # modify model parameters
+                total_loss += loss_total.item()
+
+        print(1 + epoch, total_loss / num, *perf(model, valid_loader, label_vocab))
